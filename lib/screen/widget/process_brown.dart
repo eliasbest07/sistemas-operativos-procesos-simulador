@@ -190,57 +190,58 @@ class PrioritySchedulingVisualizationState extends State<PrioritySchedulingVisua
           const SizedBox(width: 16),
         ],
       ),
-      body: Column(
-        children: [
-          // Información sobre envejecimiento
-          Container(
-            padding: const EdgeInsets.all(8),
-            margin: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.brown.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.brown.withOpacity(0.3)),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Información sobre envejecimiento
+            Container(
+              padding: const EdgeInsets.all(8),
+              margin: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.brown.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.brown.withOpacity(0.3)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Envejecimiento:",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "Técnica que aumenta la prioridad de procesos en espera para evitar la inanición. " +
+                    "Cada 3 segundos en espera, la prioridad aumenta en 1. " +
+                    "Estado actual: ${isAgingEnabled ? 'Activado' : 'Desactivado'}",
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                ],
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Envejecimiento:",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "Técnica que aumenta la prioridad de procesos en espera para evitar la inanición. " +
-                  "Cada 3 segundos en espera, la prioridad aumenta en 1. " +
-                  "Estado actual: ${isAgingEnabled ? 'Activado' : 'Desactivado'}",
-                  style: const TextStyle(fontSize: 12),
-                ),
-              ],
+            // Mostrar el proceso actual
+            Container(
+              padding: const EdgeInsets.all(10),
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  const Text(
+                    "Proceso en ejecución", 
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10),
+                  if (currentProcess != null)
+                    ActiveProcessWidget(
+                      process: currentProcess!,
+                    )
+                  else
+                    const Text("Ningún proceso en ejecución"),
+                ],
+              ),
             ),
-          ),
-          // Mostrar el proceso actual
-          Container(
-            padding: const EdgeInsets.all(10),
-            alignment: Alignment.center,
-            child: Column(
-              children: [
-                const Text(
-                  "Proceso en ejecución", 
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                if (currentProcess != null)
-                  ActiveProcessWidget(
-                    process: currentProcess!,
-                  )
-                else
-                  const Text("Ningún proceso en ejecución"),
-              ],
-            ),
-          ),
-          const Divider(thickness: 2),
-          // Mostrar la cola de espera
-          Expanded(
-            child: Container(
+            const Divider(thickness: 2),
+            // Mostrar la cola de espera
+            Container(
+              height: 800,
               padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -265,8 +266,8 @@ class PrioritySchedulingVisualizationState extends State<PrioritySchedulingVisua
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: addProcess,
