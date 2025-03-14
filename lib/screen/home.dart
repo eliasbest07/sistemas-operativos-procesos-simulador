@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Simulador de Procesos No expulsivos:'),
         leading: IconButton(onPressed: (){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
               return PerformanceGraph();
             },));
         }, icon: Icon(Icons.bar_chart_rounded)),

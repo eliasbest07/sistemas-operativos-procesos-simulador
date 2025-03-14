@@ -27,8 +27,9 @@ class _ExclusivoProcessScreenState extends State<ExclusivoProcessScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Procesos Expulsivos'),
+        
          leading: IconButton(onPressed: (){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
               return PerformanceGraph();
             },));
         }, icon: Icon(Icons.bar_chart_rounded)),
@@ -64,7 +65,7 @@ class _ExclusivoProcessScreenState extends State<ExclusivoProcessScreen> {
                   _selectedIndex = index;
                 });
               },
-              children: [
+              children: const [
                RoundRobinVisualization(),
                SRTFVisualization(),
                PrioritySchedulingVisualization()
@@ -75,7 +76,7 @@ class _ExclusivoProcessScreenState extends State<ExclusivoProcessScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.blue,
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Round Robin'),
           BottomNavigationBarItem(icon: Icon(Icons.safety_check), label: 'SRTF'),
           BottomNavigationBarItem(icon: Icon(Icons.dashboard_customize), label: 'Priority'),

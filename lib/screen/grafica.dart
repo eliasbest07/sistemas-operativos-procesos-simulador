@@ -358,7 +358,19 @@ class PerformanceGraphState extends State<PerformanceGraph> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Rendimiento de Algoritmos")),
+      appBar: AppBar(title: const Text("Rendimiento de Algoritmos"),
+      actions: [
+        IconButton(onPressed: (){
+          showDialog(context: context, builder: (context) => const Dialog(
+            child: SizedBox(
+              width: 300,
+              height: 200,
+              child: Center(child: Text('Esta grafica muestra en horizontal el tiempo en segundo, miesntras que la vertical la cantidad de procesos completados para cada algoritmo, todos toman los mismo procesos de la misma lista', textAlign: TextAlign.center,)),
+            ),
+          ),);
+        }, icon: const Icon(Icons.lightbulb_circle))
+      ],
+      ),
       body: Column(
         children: [
           const SizedBox(height: 10),
@@ -484,10 +496,10 @@ void paint(Canvas canvas, Size size) {
 
   // Dibujar ejes
   canvas.drawLine(Offset(0, size.height), Offset(size.width, size.height), axisPaint); // Eje X
-  canvas.drawLine(Offset(0, 0), Offset(0, size.height), axisPaint); // Eje Y
+  canvas.drawLine(const Offset(0, 0), Offset(0, size.height), axisPaint); // Eje Y
 
   // Dibujar etiquetas de ejes
-  final textStyle = TextStyle(color: Colors.black, fontSize: 12);
+  const textStyle =  TextStyle(color: Colors.black, fontSize: 12);
   final textPainter = TextPainter(
     textDirection: TextDirection.ltr,
     textAlign: TextAlign.center,
